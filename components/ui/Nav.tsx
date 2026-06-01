@@ -1,20 +1,18 @@
 "use client";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import Link from "next/link";
 import { useState } from "react";
 
+// 1. Changed 'id' targets to 'href' paths for multi-page routing
 const NAV_LINKS = [
-  { label: "Home", id: "hero" },
-  { label: "About", id: "about" },
-  { label: "Skills", id: "skills" },
-  { label: "Work", id: "projects" },
-  { label: "Services", id: "services" },
-  { label: "Awards", id: "achievements" },
-  { label: "Contact", id: "contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Skills", href: "/skills" },
+  { label: "Work", href: "/projects" },
+  { label: "Services", href: "/services" },
+  { label: "Awards", href: "/achievements" },
+  { label: "Contact", href: "/contact" },
 ];
-
-function scrollTo(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-}
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -36,37 +34,37 @@ export default function Nav() {
       style={{ paddingTop: 40 }}
     >
       <div className="max-w-[1400px] mx-auto px-8 py-5 flex items-center justify-between">
-        {/* Logo */}
-        <button
-          onClick={() => scrollTo("hero")}
-          className="font-display text-2xl tracking-widest text-film-gold glow-gold"
+        {/* 2. Changed Logo button to a Next.js Link pointing to home */}
+        <Link
+          href="/"
+          className="font-display text-2xl tracking-widest text-film-gold glow-gold block"
           style={{ fontFamily: "var(--font-bebas)", cursor: "none" }}
         >
           AK<span className="text-white opacity-40">.</span>WORLD
-        </button>
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-10">
           {NAV_LINKS.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => scrollTo(link.id)}
+            <Link
+              key={link.label}
+              href={link.href}
               className="nav-link"
             >
               {link.label}
-            </button>
+            </Link>
           ))}
         </nav>
 
-        {/* CTA */}
-        <button
-          onClick={() => scrollTo("contact")}
+        {/* 3. Changed CTA button to a Next.js Link pointing to contact page */}
+        <Link
+          href="/contact"
           className="hidden md:block btn-primary"
         >
           <span>Let's Build →</span>
-        </button>
+        </Link>
 
-        {/* Mobile toggle */}
+        {/* Mobile toggle (Unchanged) */}
         <button
           className="md:hidden flex flex-col gap-[5px] p-2"
           onClick={() => setOpen(!open)}
@@ -88,13 +86,14 @@ export default function Nav() {
       >
         <div className="px-8 py-6 flex flex-col gap-5">
           {NAV_LINKS.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => { scrollTo(link.id); setOpen(false); }}
-              className="nav-link text-left"
+            <Link
+              key={link.label}
+              href={link.href}
+              onClick={() => setOpen(false)} // Ensures the menu closes when a route is clicked
+              className="nav-link text-left block"
             >
               {link.label}
-            </button>
+            </Link>
           ))}
         </div>
       </motion.div>
