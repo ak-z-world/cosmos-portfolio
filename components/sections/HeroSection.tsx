@@ -131,25 +131,9 @@ export default function HeroSection() {
         style={{ y, opacity }}
         className="relative z-10 max-w-[1400px] mx-auto px-8 w-full"
       >
-        {/* Frame number / top label */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="flex items-center gap-4 mb-12"
-        >
-          <span
-            className="section-label opacity-50"
-            style={{ fontFamily: "var(--font-space-mono)" }}
-          >
-            Frame 001
-          </span>
-          <div className="h-px flex-1 max-w-[60px] bg-film-gold opacity-30" />
-          <span className="section-label">Python · AI Engineer · LLM Architect</span>
-        </motion.div>
-
+        
         {/* Main display type */}
-        <div className="overflow-hidden mb-2">
+        <div className="overflow-hidden mb-2 mt-5">
           <motion.div
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
